@@ -40,29 +40,91 @@ def view_statement(account_balance, statement, deposits, withdrawals):
     print(f"You made {deposits} deposit(s) and {withdrawals} withdrawal(s).")
     print("No activities were performed." if not statement else statement)
 
+def filter_user(cpf, users):
+    filtered_users = [user for user in users if user["cpf"] == cpf]
+    return filtered_users[0] if filtered_users else None
+
+def create_user(users):
+    cpf = int(input("Enter your CPF (numbers only): "))
+    user = filter_user(cpf, users)
+
+    if user:
+        print("\n===== User with this CPF already exists! ====")
+        return
+    username = str(input("Enter your username: "))
+    user_birth = str(input("Enter your birth date (MM/DD/YYYY): "))
+    user_address = str(input("Enter your address: "))
+
+    users.append({"name": username, "user_birth": user_birth, "user_address": user_address, "cpf": cpf})
+
+    print("==== User created successfully! ====")
+
+def create_account(agency, account_num, users):
+    cpf = int(input("Enter your CPF (numbers only): "))
+    user = filter_user(cpf, users)
+
+    if user:
+        print("==== Account created successfully! ====")
+        return {"agency": agency, "account_num": account_num, "user": user}
+    print("==== User not found, please insert an existing CPF! ====")
+
+def list_account(accounts):
+    for account in accounts:
+        print(f"""
+==================================================
+                Agency: {account['agency']}
+                Account Number: {account['account_num']}
+                Username: {account['user']['name']}
+==================================================
+        """)
+
 menu = """
-[d] Deposit
-[w] Withdraw
-[v] View Statement
-[q] Quit
+[ d ] Deposit
+[ w ] Withdraw
+[ v ] View Statement
+[ nu ] New User
+[ na ] New Account
+[ la ] List All Accounts
+[ q ] Quit
+
 => """
 
 account_balance = 0
 statement = ""
 deposits = 0
 withdrawals = 0
+users = []
+accounts = []
+account_num = 0
+AGENCY = "0001"
 
 while True:
     option = input(menu).lower()
-
+    
     if option == "d":
         account_balance, statement, deposits = deposit(account_balance, statement, deposits)
-
+        
     elif option == "w":
         account_balance, statement, withdrawals = withdraw(account_balance, statement, withdrawals)
-
+        
     elif option == "v":
         view_statement(account_balance, statement, deposits, withdrawals)
 
+    elif option == "nu":
+        create_user(users)
+
+    elif option == "na":
+        account_num = len(accounts) + 1
+        account = create_account(AGENCY, account_num, users)
+
+        if account:
+            accounts.append(account)
+
+    elif option == "la":
+        list_account(accounts)
+        
     elif option == "q":
         break
+
+    else:
+        print("========= Invalid operation, please try again! =========")
