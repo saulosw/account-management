@@ -188,8 +188,6 @@ def get_client_account(client):
     if not client.accounts:
         print("\n@@@ Client does not have any account! @@@")
         return
-
-    # FIXME: Does not allow the client to choose the account
     return client.accounts[0]
 
 
@@ -257,23 +255,37 @@ def show_statement(clients):
 
 
 def create_client(clients):
-    cpf = input("Enter the CPF (numbers only): ")
-    client = find_client(cpf, clients)
+        cpf = input("Enter the CPF (numbers only): ")
+        if not cpf.isdigit():
+            print("\n@@@ Error: CPF must contain only numbers! @@@")
+            main()
+            return
 
-    if client:
-        print("\n@@@ Client with this CPF already exists! @@@")
-        return
+        client = find_client(cpf, clients)
 
-    name = input("Enter the full name: ")
-    date_of_birth = input("Enter the date of birth (dd-mm-yyyy): ")
-    address = input("Enter the address (street, number - neighborhood - city/state): ")
+        if client:
+            print("\n@@@ Client with this CPF already exists! @@@")
+            return
 
-    client = Person(name=name, date_of_birth=date_of_birth, cpf=cpf, address=address)
+        name = input("Enter the full name (Only text): ")
+        date_of_birth = input("Enter the date of birth (Only Numbers) (ddmmyyyy): ")
+        address = input("Enter the address (street, number - neighborhood - city/state) (Only text): ")
+        
+        if name.isdigit() or address.isdigit():
+            print("\n@@@ Error: Name or Addres must contain only text! @@@")
+            main()
+            return
+        
+        if not date_of_birth.isdigit():
+            print("\n@@@ Error: Your date of birth must contain only numbers! @@@")
+            main()
+            return
 
-    clients.append(client)
+        client = Person(name=name, date_of_birth=date_of_birth, cpf=cpf, address=address)
 
-    print("\n=== Client created successfully! ===")
+        clients.append(client)
 
+        print("\n=== Client created successfully! ===")
 
 def create_account(account_number, clients, accounts):
     cpf = input("Enter the CPF of the client: ")
@@ -301,7 +313,7 @@ def main():
     accounts = []
 
     while True:
-        option = menu()
+        option = menu().lower()
 
         if option == "d":
             deposit(clients)
