@@ -31,7 +31,7 @@ class Account:
         self._branch = "0001"
         self._client = client
         self._history = TransactionHistory()
-        self._daily_deposit_count = 0  # Contador de transferências diárias
+        self._daily_deposit_count = 0
 
     @classmethod
     def new_account(cls, client, number):
@@ -173,7 +173,6 @@ class Deposit(Transaction):
             account.history.add_transaction(self)
 
 
-# Função para salvar as informações do cliente em um arquivo CSV
 def save_client_info(client):
     folder = "clients"
     if not os.path.exists(folder):
@@ -186,7 +185,6 @@ def save_client_info(client):
     print(f"\n=== Client information saved successfully in {filename}! ===")
 
 
-# Função para salvar o extrato da conta em um arquivo TXT
 def save_account_statement(account):
     folder = "statements"
     if not os.path.exists(folder):
@@ -204,8 +202,6 @@ def save_account_statement(account):
         file.write(f"Balance: $ {account.balance:.2f}\n")
     print(f"\n=== Account statement saved successfully in {filename}! ===")
 
-
-# Função para salvar as informações da conta em um arquivo TXT
 def save_account_info(account):
     folder = "accounts"
     if not os.path.exists(folder):
@@ -305,7 +301,7 @@ def show_statement(clients):
     print(f"\nBalance:\n\t$ {account.balance:.2f}")
     print("==========================================")
 
-    save_account_statement(account)  # Adição para salvar extrato em arquivo TXT
+    save_account_statement(account)
 
 
 def create_client(clients):
