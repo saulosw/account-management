@@ -3,7 +3,7 @@ This Python script serves as a bank account management system. It allows users t
 
 # Bank Account Management System
 
-This repository contains a bank account management system developed in Python. The system allows the creation of clients and accounts, as well as operations such as deposit, withdrawal, and sending welcome emails. The implementation uses various standard Python libraries and an HTML template file for the email.
+This repository contains a bank account management system developed in Python. The system allows the creation of clients and accounts, as well as operations such as deposit, withdrawal, and emails. The implementation uses various standard Python libraries and an HTML template file for the email (only in version 5).
 
 ## Features
 
