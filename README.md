@@ -10,7 +10,7 @@ This repository contains a bank account management system developed in Python. T
 - **Client and Account Creation:** Allows the creation of new clients and association of accounts with them.
 - **Deposits and Withdrawals:** Performs deposit and withdrawal operations with configurable limits.
 - **Transaction History:** Keeps a record of transactions performed on accounts.
-- **Sending Welcome Email:** Sends a welcome email to new clients using an HTML template.
+- **Validate Email:** Sends a welcome to new clients using an HTML template and send a validation code by email.
 - **CPF Validation:** Validates the CPF numbers of clients.
 
 ### Prerequisites
