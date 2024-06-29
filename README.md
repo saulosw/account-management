@@ -23,7 +23,7 @@ This repository contains a bank account management system developed in Python. T
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/bank-system.git
+git clone https://github.com/saulosw/bank-system.git
 cd bank-system
 ```
 # Contributions
