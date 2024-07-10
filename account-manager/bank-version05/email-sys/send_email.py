@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-def send_welcome_email(destinatario, nome, client_code):
+def email_validate(destinatario, nome, client_code):
 
     load_dotenv()
 
